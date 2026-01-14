@@ -1,0 +1,242 @@
+---
+alwaysApply: false
+---
+# Figma MCP Rules — Unified (Lo-fi + Hi-fi)
+
+## Purpose
+- Provide a single, concise rule set for automated Figma work across two fidelities.
+- Lo-fi: validate layout and flow. Hi-fi: apply design system and polish.
+
+## When to Use
+- Gate A (Lo-fi): outputs/docs/04-화면설계.md
+- Gate B (Hi-fi): outputs/docs/05-디자인정책.md
+
+## Prerequisites
+- Lo-fi: PRD approved, Screen Design in progress
+- Hi-fi: Lo-fi approved (Gate A) + 05-디자인정책.md with tokens (colors, typography, spacing, components, iconography, motion)
+
+## Component Types
+- Basic: container, card, button, text, icon, image, avatar (Hi-fi)
+- Inputs: input, textarea (Hi-fi), checkbox (Hi-fi), radio (Hi-fi), switch (Hi-fi), dropdown (Hi-fi), slider (Hi-fi), progressbar
+- State: skeleton, spinner, overlay, toast/snackbar (Hi-fi)
+- Layout: header, footer, navbar (Hi-fi), sidebar (Hi-fi), tabbar, bottomtab, modal, drawer (Hi-fi), divider, badge, chip (Hi-fi), scrollview
+- Advanced (Hi-fi): carousel, accordion, tooltip, popover
+
+## Lo-fi Rules (Wireframes)
+- Colors: grayscale only (#FFFFFF, #F5F5F5, #E0E0E0, #BDBDBD, #9E9E9E, #616161, #424242)
+- Shapes: simple rectangles; no gradients/shadows/photos
+- Placeholders: [Text], [Image]; simple unicode icons (☰, ×, ←, →, ⚙, ⋮)
+- 8px grid: spacing 4/8/16/24/32/48; screen padding 20; card 16; button 12v/24h
+- Typography: system font; headings 20–28 bold; body 14–16; caption 12
+- Essentials:
+  - container: fill #FFF; stroke #E0E0E0; 1px; radius 0
+  - card: fill #F5F5F5; stroke #E0E0E0; 1px; radius 8
+  - button: fill #E0E0E0; radius 4; text #616161
+  - input: fill #FFF; stroke #BDBDBD; 1px; placeholder #9E9E9E; radius 4
+  - progressbar: track #E0E0E0; fill #9E9E9E; h 8–12; r 4
+  - skeleton: #E0E0E0; spinner: stroke #9E9E9E; w 3; 32–40
+  - overlay: #000 @ 0.5; header/tabbar h 56; footer h 64–80; bottomtab h 56
+  - modal: fill #FFF; stroke #E0E0E0; r 12; divider: #E0E0E0 1px; badge: #9E9E9E r12 text #FFF
+
+### Screen Height Rules (CRITICAL)
+
+**Lo-fi (Wireframes)**: Content-based height
+- **Screen `height`**: Dynamic, calculated from content (NOT fixed at 812)
+- **NO `scrollable` attribute** in Lo-fi
+- Calculate: `height = max(component.y + component.height)` for all components
+- Example:
+  ```
+  Components:
+  - header: y=0, h=56 → bottomEdge = 56
+  - card: y=72, h=500 → bottomEdge = 572
+  - button: y=600, h=48 → bottomEdge = 648
+  - last element: y=1096, h=48 → bottomEdge = 1144
+
+  Screen height = 1144 (dynamic, matches content)
+  ```
+
+**Hi-fi (Prototypes)**: Fixed viewport + scrollable
+- **Screen `height`**: Always 812px (viewport size, fixed)
+- **Use `scrollable` attribute**: Set `"scrollable": true` if content > 812px
+- Fixed elements (header, bottomtab) overlay content
+- Example:
+  ```
+  Screen height = 812 (fixed)
+  Content height = 1144
+  → Set scrollable: true
+  ```
+
+### Component Positioning Validation (CRITICAL)
+**Screen Boundaries**: Mobile (375 × 812), Tablet (768 × 1024), Desktop (1440 × 900)
+
+**Lo-fi Validation**:
+- X-axis: 0 ≤ x ≤ (screenWidth - componentWidth)
+- Y-axis: No upper limit (screen height adjusts to content)
+- Right edge: x + width ≤ screenWidth
+- Components placed freely; screen height = max(component.y + component.height)
+
+**Hi-fi Validation**:
+- X-axis: 0 ≤ x ≤ (screenWidth - componentWidth)
+- Y-axis: No upper limit if scrollable: true
+- Fixed elements (header y=0, bottomtab y=756) must fit within 812px viewport
+- Scrollable content can exceed 812px
+
+**Common Issues**:
+- Full-width cards (343): max x = 16 (with 16px padding)
+- Buttons centered: x = (375 - width) / 2
+- Hi-fi fixed bottom tab: always y=756 (overlays content)
+
+### Minimal JSON (Lo-fi only)
+- Meta
+```json
+{
+  "meta": {
+    "project": "[ProjectName]",
+    "version": "1.0",
+    "fidelity": "low",
+    "stage": "04-화면설계",
+    "createdAt": "YYYY-MM-DD",
+    "updatedAt": "YYYY-MM-DD",
+    "description": "Low-fidelity wireframes"
+  }
+}
+```
+- Screen (Lo-fi)
+```json
+{
+  "screens": [
+    {
+      "id": "screen-home",
+      "name": "홈",
+      "x": 0, "y": 0, "width": 375, "height": 1144,
+      "components": [
+        { "id": "header-home", "type": "header", "x": 0, "y": 0, "width": 375, "height": 56 },
+        { "id": "title-home", "type": "text", "label": "[앱 이름]", "x": 16, "y": 18, "fontSize": 20, "fontWeight": "bold" },
+        { "id": "card-balance", "type": "card", "x": 16, "y": 72, "width": 343, "height": 80 },
+        { "id": "last-button", "type": "button", "x": 16, "y": 1096, "width": 343, "height": 48 },
+        { "id": "bottomtab", "type": "bottomtab", "x": 0, "y": 756, "width": 375, "height": 56 }
+      ]
+    }
+  ]
+}
+```
+**Note**: Lo-fi screen `height` is calculated from content: max(1144) = last component (y=1096 + h=48). NO `scrollable` attribute.
+
+- Screen (Hi-fi)
+```json
+{
+  "screens": [
+    {
+      "id": "screen-home",
+      "name": "홈",
+      "x": 0, "y": 0, "width": 375, "height": 812,
+      "scrollable": true,
+      "components": [
+        { "id": "header-home", "type": "header", "x": 0, "y": 0, "width": 375, "height": 56 },
+        { "id": "last-button", "type": "button", "x": 16, "y": 1096, "width": 343, "height": 48 },
+        { "id": "bottomtab", "type": "bottomtab", "x": 0, "y": 756, "width": 375, "height": 56 }
+      ]
+    }
+  ]
+}
+```
+**Note**: Hi-fi screen `height` is fixed at 812 (viewport). Content exceeds 812 → set `scrollable: true`.
+- State & Modal
+```json
+{ "id": "screen-home-loading", "state": "loading", "components": [
+  { "id": "skeleton-1", "type": "skeleton", "x": 16, "y": 72, "width": 343, "height": 80 },
+  { "id": "spinner", "type": "spinner", "x": 167, "y": 400, "width": 40, "height": 40 }
+] }
+```
+```json
+{ "id": "modal-confirm", "type": "modal", "components": [
+  { "id": "overlay", "type": "overlay", "opacity": 0.5 },
+  { "id": "modal-container", "type": "card", "x": 47, "y": 306, "width": 280, "height": 200 },
+  { "id": "btn-cancel", "type": "button", "label": "[취소]", "linkTo": "previous-screen" },
+  { "id": "btn-confirm", "type": "button", "label": "[확인]", "linkTo": "next-screen" }
+] }
+```
+- Interactions
+```json
+{ "interactions": [
+  { "sourceId": "btn-shop", "event": "onClick", "targetScreenId": "screen-shop", "transition": "instant" },
+  { "sourceId": "modal-overlay", "event": "onClick", "targetScreenId": "screen-home", "transition": "fade" }
+] }
+```
+
+## Hi-fi Rules (Design System)
+- Apply tokens from 05-디자인정책.md: colors, typography, spacing, radii, elevation
+- Replace placeholders with real fonts/icons/images; respect aspect ratios; provide skeleton/blur loading and fallbacks
+- Define variants and states: default/hover/pressed/disabled/loading
+- Motion: transitions per token (instant/fast/normal/slow); button press scale; card hover lift; input focus ring; modal scale+fade; drawer slide
+- Accessibility: contrast ≥ 4.5:1 (≥3:1 large text); touch targets ≥ 44×44; visible focus rings 2–3px
+
+## Screen Validation Rules (CRITICAL)
+
+### Individual Screen Validation
+**After creating EACH screen**:
+1. Read entire `/outputs/docs/04-화면설계.md` file (all sections)
+2. Verify the created screen matches specifications from "4. 화면 목록":
+   - Screen name (화면명)
+   - Route (라우트)
+   - Screen type (유형)
+   - Key components listed in memo
+3. Cross-reference with user flows (section 2) and screen structure (section 3)
+4. If mismatch found → fix immediately before next screen
+
+### Complete Coverage Validation (MOST IMPORTANT)
+**After creating ALL screens**:
+1. **MANDATORY CHECK**: Read entire `/outputs/docs/04-화면설계.md` file
+2. Extract full list of required screens from "4. 화면 목록" table (all rows)
+3. Compare with created screens in JSON:
+   - Check: Does every screen from 화면설계 exist in JSON?
+   - List: Missing screens
+   - List: Extra screens (not in 화면설계)
+4. **If any screens are missing**:
+   - Create missing screens immediately
+   - Follow same lo-fi rules
+   - Add to JSON in correct position (match flow order from section 2)
+   - Reference user flows to understand screen context
+5. **Report**:
+   - ✅ "모든 화면 생성 완료 (X/X)"
+   - ❌ "누락된 화면 발견: [list] → 생성 중..."
+
+**Example Check**:
+```
+04-화면설계.md screens: 30개
+lofi-wireframes.json screens: 8개
+→ Missing: 22개 (타이밍 맞추기, 에너지, 포인트 내역, 회차 히스토리, ...)
+→ Action: Create all 22 missing screens
+```
+
+**DO NOT proceed to Hi-fi without 100% coverage.**
+
+## MCP Functions
+- Frame & Layout: create_frame, resize_frame, set_layout_grid, set_auto_layout, set_constraints, set_alignment, set_sizing (fixed/hug/fill), set_padding, set_spacing, set_direction
+- Nodes & Shapes: create_rectangle, create_ellipse, create_line, create_polygon, create_star, create_vector, set_corner_radius, set_corner_smoothing, create_group, group_nodes, ungroup_nodes, clone_node, delete_node, bring_to_front, send_to_back
+- Styling: set_fills (solid/gradient/image), set_strokes, set_stroke_weight, set_dash_pattern, set_opacity, set_blend_mode, add_effects (drop_shadow, inner_shadow, layer_blur, background_blur), remove_effects
+- Text: create_text, set_text_properties (font/size/weight/letterSpacing/lineHeight/alignment), auto_resize_text, set_text_styles, apply_text_style
+- Media: insert_image, set_image_fill, replace_image, apply_blur
+- Components & Variants: create_component, create_variant, set_variant_properties, create_instance, detach_instance, swap_instance, override_instance_properties
+- Auto Layout (advanced): set_auto_layout (dir/spacing/padding), set_alignment, set_sizing, distribute_spacing
+- Prototyping: create_prototype_link, remove_prototype_link, set_transition (instant/dissolve/slide/push/move/smart_animate), set_scroll_behavior, add_overlay, set_overlay_position, set_interaction_hotspot
+- Export & Handoff: export_frame, export_assets, export_svg, export_png, generate_css, get_design_tokens, get_file_url
+- Utilities: find_node_by_id, query_nodes_by_type, select_nodes, set_selection, get_bounding_box
+
+## Workflow
+1) Lo-fi
+   - Parse 04-화면설계.md → build grayscale screens + basic links
+   - Include states (loading/empty/error) and essential modals
+   - **MUST run Complete Coverage Validation before Gate A**
+   - Seek Gate A approval
+2) Hi-fi
+   - Load Lo-fi; import tokens from 05-디자인정책.md; style components
+   - Define variants/states, add interactions and transitions
+   - Validate a11y; export tokens/assets; share prototype; seek Gate B approval
+
+## Best Practices & Checklist
+- DO: keep Lo-fi grayscale; follow tokens in Hi-fi; include states; ensure responsiveness
+- DON'T: deviate from tokens; over-design Lo-fi; skip prototype links/states
+- Checklist
+  - Lo-fi: grayscale only; placeholders clear; states covered; links connected; spacing consistent; **ALL screens from 04-화면설계.md created**
+  - Hi-fi: tokens applied; fonts loaded; variants complete; shadows consistent; images OK; icons integrated; transitions added; contrast OK; touch targets OK; tokens exported

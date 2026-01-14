@@ -1,0 +1,49 @@
+---
+alwaysApply: false
+---
+# Technical Spec Writing Rules
+
+## Document Definition
+- **Filename**: `outputs/docs/06-개발설계.md`
+- **Purpose**: Define architecture, API, data model, integrations, and NFRs
+- **Owner**: Engineering Lead
+
+## Prerequisites
+- `outputs/docs/04-화면설계.md` approved (can be parallel with 05)
+
+## Strict Sequential Mode (Enforced)
+
+This document is SECTION-GATED. Produce exactly one section per turn and wait for explicit approval before moving on.
+
+### Hard Rules
+- Only one section per turn. If asked to "전체 작성", refuse and ask which section to start.
+- Use approval phrase to proceed with SECTION TITLE (not numbers).
+- Keep process/gate messages in chat, not in the document.
+
+### Per-Section Pre-Work Report (Short)
+- Goal: "섹션 N 초안 작성"
+- Scope: that section only
+- Approach: 2-3 bullets
+- Rule Applied: `.cursor/rules/06-개발설계-규칙.mdc`
+
+## Required Sections (Order, One per Turn)
+1. 목적 & 범위
+2. 전체 아키텍처 개요(클라이언트/백엔드/서드파티)
+3. 클라이언트 아키텍처(상태관리/모듈/네비게이션)
+4. 백엔드 아키텍처(서비스/DB/캐시) — 해당 시
+5. 데이터 모델(엔티티/관계/주요 컬럼)
+6. API 명세(엔드포인트/페이로드/응답/상태코드)
+7. 오류 처리 & 에러 코드(규약/재시도/타임아웃)
+8. 광고 연동(로딩/노출/재로딩/타임아웃/예외)
+9. 분석 이벤트(이벤트명/속성/전송 시점)
+10. 비기능 요구사항(NFR: 성능/보안/배터리/로깅)
+11. 배포 & 릴리스 전략(채널/버전/롤백)
+12. 리스크 & 제약
+
+## Constraints
+- Do NOT restate numbers from 서비스정책; reference it instead.
+- Keep API and data model consistent with screen routes and flows.
+
+## Related Files
+- Previous: `outputs/docs/04-화면설계.md`, `outputs/docs/05-디자인정책.md`
+- Next: `outputs/docs/07-테스트계획.md`
