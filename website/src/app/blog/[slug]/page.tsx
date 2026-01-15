@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { use } from "react";
 
+export const runtime = "edge";
+
 // 아이콘 대체용 이모지
 const iconMap: Record<string, string> = {
   instagram: "📸",
