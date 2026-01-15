@@ -959,17 +959,8 @@ export default async function BlogPost({
                 공유하기:
               </span>
               <div className="flex items-center gap-2">
-                <button
-                  onClick={handleCopyLink}
-                  className="flex items-center justify-center w-9 h-9 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors"
-                  title="링크 복사"
-                >
-                  <FaLink className="text-sm" />
-                </button>
                 <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${
-                    typeof window !== "undefined" ? window.location.href : ""
-                  }`}
+                  href={`https://www.facebook.com/sharer/sharer.php?u=https://snshotdeal.co.kr/blog/${slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-9 h-9 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
@@ -978,9 +969,7 @@ export default async function BlogPost({
                   <FaFacebookF className="text-sm" />
                 </a>
                 <a
-                  href={`https://twitter.com/intent/tweet?url=${
-                    typeof window !== "undefined" ? window.location.href : ""
-                  }&text=${post.title}`}
+                  href={`https://twitter.com/intent/tweet?url=https://snshotdeal.co.kr/blog/${slug}&text=${post.title}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-9 h-9 rounded-lg bg-sky-500 hover:bg-sky-600 text-white transition-colors"
@@ -989,11 +978,6 @@ export default async function BlogPost({
                   <FaTwitter className="text-sm" />
                 </a>
               </div>
-              {copiedLink && (
-                <span className="text-sm text-[#EB5644] font-medium">
-                  링크가 복사되었습니다!
-                </span>
-              )}
             </div>
 
             {/* Divider */}
