@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+"use client";
 
 import Link from "next/link";
 import {
@@ -1179,4 +1179,11 @@ export default function BlogPost({
       </div>
     </main>
   );
+}
+
+// 정적 페이지 생성을 위한 params
+export function generateStaticParams() {
+  return Object.keys(blogPosts).map((slug) => ({
+    slug,
+  }));
 }
