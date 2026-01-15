@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   FaInstagram,
@@ -13,7 +11,6 @@ import {
   FaTwitter,
   FaLink,
 } from "react-icons/fa";
-import { use, useState } from "react";
 
 // 블로그 포스트 데이터
 const blogPosts = {
@@ -854,14 +851,13 @@ const blogPosts = {
   },
 };
 
-export default function BlogPost({
+export default async function BlogPost({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = use(params);
+  const { slug } = await params;
   const post = blogPosts[slug as keyof typeof blogPosts];
-  const [copiedLink, setCopiedLink] = useState(false);
 
   if (!post) {
     return (
@@ -882,12 +878,6 @@ export default function BlogPost({
   }
 
   const IconComponent = post.icon;
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
-  };
 
   // 관련 포스트 가져오기
   const relatedPostsData = post.relatedPosts
