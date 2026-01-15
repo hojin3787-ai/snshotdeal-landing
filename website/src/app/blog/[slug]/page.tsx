@@ -1,23 +1,27 @@
 import Link from "next/link";
-import {
-  FaInstagram,
-  FaYoutube,
-  FaTiktok,
-  FaArrowLeft,
-  FaClock,
-  FaTag,
-  FaShareAlt,
-  FaFacebookF,
-  FaTwitter,
-  FaLink,
-} from "react-icons/fa";
+import { use } from "react";
+
+// 아이콘 대체용 이모지
+const iconMap: Record<string, string> = {
+  instagram: "📸",
+  youtube: "🎬",
+  tiktok: "🎵",
+};
+
+// 아이콘 컴포넌트 대체
+const IconEmoji = ({ type }: { type: string }) => <span>{iconMap[type] || "📱"}</span>;
+const ArrowLeftIcon = () => <span>←</span>;
+const ClockIcon = () => <span>🕐</span>;
+const TagIcon = () => <span>🏷️</span>;
+const FacebookIcon = () => <span>f</span>;
+const TwitterIcon = () => <span>𝕏</span>;
 
 // 블로그 포스트 데이터
 const blogPosts = {
   "instagram-follower-growth": {
     title: "인스타그램 팔로워 늘리는 5가지 방법",
     category: "Instagram",
-    icon: FaInstagram,
+    icon: "instagram",
     iconColor: "#E4405F",
     date: "2026.01.14",
     readTime: "8분",
@@ -79,7 +83,7 @@ const blogPosts = {
   "youtube-algorithm-guide": {
     title: "유튜브 알고리즘 완전 정복 가이드",
     category: "YouTube",
-    icon: FaYoutube,
+    icon: "youtube",
     iconColor: "#FF0000",
     date: "2026.01.12",
     readTime: "7분",
@@ -136,7 +140,7 @@ const blogPosts = {
   "tiktok-viral-strategy": {
     title: "틱톡에서 바이럴 일으키는 법",
     category: "TikTok",
-    icon: FaTiktok,
+    icon: "tiktok",
     iconColor: "#000000",
     date: "2026.01.10",
     readTime: "7분",
@@ -204,7 +208,7 @@ const blogPosts = {
   "sns-content-strategy": {
     title: "SNS 콘텐츠 전략 완벽 가이드",
     category: "Instagram",
-    icon: FaInstagram,
+    icon: "instagram",
     iconColor: "#E4405F",
     date: "2026.01.08",
     readTime: "10분",
@@ -284,7 +288,7 @@ const blogPosts = {
   "youtube-shorts-tips": {
     title: "YouTube Shorts로 구독자 늘리기",
     category: "YouTube",
-    icon: FaYoutube,
+    icon: "youtube",
     iconColor: "#FF0000",
     date: "2026.01.05",
     readTime: "7분",
@@ -346,7 +350,7 @@ const blogPosts = {
   "tiktok-trends-2024": {
     title: "2026 TikTok 트렌드 전망",
     category: "TikTok",
-    icon: FaTiktok,
+    icon: "tiktok",
     iconColor: "#000000",
     date: "2026.01.03",
     readTime: "8분",
@@ -414,7 +418,7 @@ const blogPosts = {
   "instagram-reels-mastery": {
     title: "인스타그램 릴스 마스터하기",
     category: "Instagram",
-    icon: FaInstagram,
+    icon: "instagram",
     iconColor: "#E4405F",
     date: "2026.01.13",
     readTime: "9분",
@@ -482,7 +486,7 @@ const blogPosts = {
   "youtube-seo-complete-guide": {
     title: "YouTube SEO 완벽 가이드",
     category: "YouTube",
-    icon: FaYoutube,
+    icon: "youtube",
     iconColor: "#FF0000",
     date: "2026.01.11",
     readTime: "10분",
@@ -556,7 +560,7 @@ const blogPosts = {
   "tiktok-hashtag-strategy": {
     title: "틱톡 해시태그 전략의 모든 것",
     category: "TikTok",
-    icon: FaTiktok,
+    icon: "tiktok",
     iconColor: "#000000",
     date: "2026.01.09",
     readTime: "9분",
@@ -630,7 +634,7 @@ const blogPosts = {
   "instagram-story-engagement": {
     title: "인스타그램 스토리로 참여율 높이기",
     category: "Instagram",
-    icon: FaInstagram,
+    icon: "instagram",
     iconColor: "#E4405F",
     date: "2026.01.07",
     readTime: "8분",
@@ -704,7 +708,7 @@ const blogPosts = {
   "youtube-thumbnail-design": {
     title: "클릭을 부르는 유튜브 썸네일 디자인",
     category: "YouTube",
-    icon: FaYoutube,
+    icon: "youtube",
     iconColor: "#FF0000",
     date: "2026.01.06",
     readTime: "7분",
@@ -778,7 +782,7 @@ const blogPosts = {
   "tiktok-live-streaming-tips": {
     title: "틱톡 라이브로 팔로워 폭발 성장시키기",
     category: "TikTok",
-    icon: FaTiktok,
+    icon: "tiktok",
     iconColor: "#000000",
     date: "2026.01.04",
     readTime: "6분",
@@ -851,12 +855,12 @@ const blogPosts = {
   },
 };
 
-export default async function BlogPost({
+export default function BlogPost({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const { slug } = use(params);
   const post = blogPosts[slug as keyof typeof blogPosts];
 
   if (!post) {
@@ -877,7 +881,7 @@ export default async function BlogPost({
     );
   }
 
-  const IconComponent = post.icon;
+  const IconComponent = () => <IconEmoji type={post.icon} />;
 
   // 관련 포스트 가져오기
   const relatedPostsData = post.relatedPosts
@@ -914,7 +918,7 @@ export default async function BlogPost({
             href="/blog"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-[#EB5644] mb-6 transition-colors font-medium"
           >
-            <FaArrowLeft />
+            <ArrowLeftIcon />
             <span>블로그 목록으로</span>
           </Link>
 
@@ -932,11 +936,11 @@ export default async function BlogPost({
                 </div>
                 <div className="flex items-center gap-4 text-sm text-gray-500">
                   <div className="flex items-center gap-1.5">
-                    <FaClock />
+                    <ClockIcon />
                     <span>{post.readTime}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <FaTag />
+                    <TagIcon />
                     <span>{post.date}</span>
                   </div>
                 </div>
@@ -966,7 +970,7 @@ export default async function BlogPost({
                   className="flex items-center justify-center w-9 h-9 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
                   title="Facebook 공유"
                 >
-                  <FaFacebookF className="text-sm" />
+                  <FacebookIcon />
                 </a>
                 <a
                   href={`https://twitter.com/intent/tweet?url=https://snshotdeal.co.kr/blog/${slug}&text=${post.title}`}
@@ -975,7 +979,7 @@ export default async function BlogPost({
                   className="flex items-center justify-center w-9 h-9 rounded-lg bg-sky-500 hover:bg-sky-600 text-white transition-colors"
                   title="Twitter 공유"
                 >
-                  <FaTwitter className="text-sm" />
+                  <TwitterIcon />
                 </a>
               </div>
             </div>
@@ -1085,7 +1089,6 @@ export default async function BlogPost({
               <h2 className="text-2xl font-bold text-gray-900 mb-6">관련 글</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {relatedPostsData.map((relatedPost: any) => {
-                  const RelatedIcon = relatedPost.icon;
                   return (
                     <Link
                       key={relatedPost.slug}
@@ -1097,7 +1100,7 @@ export default async function BlogPost({
                           className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold text-white mb-4 w-fit"
                           style={{ backgroundColor: relatedPost.iconColor }}
                         >
-                          <RelatedIcon />
+                          <IconEmoji type={relatedPost.icon} />
                           <span>{relatedPost.category}</span>
                         </div>
                         <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#EB5644] transition-colors">
@@ -1108,7 +1111,7 @@ export default async function BlogPost({
                         </p>
                         <div className="flex items-center gap-3 mt-4 text-xs text-gray-500">
                           <span className="flex items-center gap-1">
-                            <FaClock />
+                            <ClockIcon />
                             {relatedPost.readTime}
                           </span>
                           <span>{relatedPost.date}</span>
@@ -1153,11 +1156,4 @@ export default async function BlogPost({
       </div>
     </main>
   );
-}
-
-// 정적 페이지 생성을 위한 params
-export function generateStaticParams() {
-  return Object.keys(blogPosts).map((slug) => ({
-    slug,
-  }));
 }
