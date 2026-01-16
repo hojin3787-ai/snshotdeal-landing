@@ -34,7 +34,8 @@ export default function XPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/pricing"
-                className="bg-white hover:bg-gray-50 text-black font-bold px-8 py-4 rounded-xl text-base transition-all shadow-2xl hover:shadow-3xl hover:scale-105 transform"
+                className="inline-flex items-center justify-center bg-white hover:bg-gray-50 text-black font-bold px-8 py-4 rounded-xl text-base transition-all shadow-2xl hover:shadow-3xl hover:scale-105 transform"
+                style={{ paddingTop: '16px', paddingBottom: '16px' }}
               >
                 가격 확인하기
               </Link>
@@ -711,8 +712,8 @@ export default function XPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/pricing"
-                className="bg-white hover:bg-gray-100 font-semibold px-10 py-4 rounded-lg text-lg transition-colors shadow-lg hover:shadow-xl"
-                style={{ color: '#EB5644' }}
+                className="inline-flex items-center justify-center bg-white hover:bg-gray-100 font-semibold px-10 py-4 rounded-lg text-lg transition-colors shadow-lg hover:shadow-xl"
+                style={{ color: '#EB5644', paddingTop: '16px', paddingBottom: '16px' }}
               >
                 가격 확인하기
               </Link>
