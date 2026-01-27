@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     google: "ZphvXU-ZspQEwbBzJrN5QFrCNe8mIs8ua8Eh_iGUe6c",
     // 네이버 서치어드바이저: https://searchadvisor.naver.com 에서 확인 코드 받아서 교체
     other: {
-      "naver-site-verification": "YOUR_NAVER_VERIFICATION_CODE",
+      "naver-site-verification": "b7f535b3977d1dd2f450e7038226edb1b48340c1",
     },
   },
   openGraph: {
