@@ -29,6 +29,14 @@ export const metadata: Metadata = {
     "틱톡 팔로워",
     "팔로워 늘리기",
   ],
+  verification: {
+    // 구글 서치콘솔: https://search.google.com/search-console 에서 확인 코드 받아서 교체
+    google: "PGDEtvrBRV3c5qJBbZ9huLikKc6176t6SdJO-0NXDO4",
+    // 네이버 서치어드바이저: https://searchadvisor.naver.com 에서 확인 코드 받아서 교체
+    other: {
+      "naver-site-verification": "YOUR_NAVER_VERIFICATION_CODE",
+    },
+  },
   openGraph: {
     title: "SNS핫딜 - SNS 마케팅을 쉽고 빠르게",
     description:
@@ -58,8 +66,48 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  
+  // JSON-LD 구조화 데이터
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "SNS핫딜",
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    description: "인스타그램, 유튜브, 틱톡 계정 성장을 위한 믿을 수 있는 SNS 마케팅 서비스",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "고객 지원",
+      availableLanguage: ["ko"],
+    },
+    sameAs: [
+      "https://www.instagram.com/snshotdeal",
+      "https://www.youtube.com/@snshotdeal",
+    ],
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "SNS핫딜",
+    url: siteUrl,
+    description: "SNS 마케팅을 쉽고 빠르게",
+    inLanguage: "ko-KR",
+  };
+
   return (
     <html lang="ko">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

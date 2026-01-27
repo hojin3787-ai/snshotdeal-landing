@@ -1,10 +1,10 @@
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export default function Head() {
-  const title = "무료 상담 및 문의 | SNS핫딜";
+  const title = "SNS 마케팅 블로그 | SNS핫딜";
   const description =
-    "SNS 마케팅 서비스에 대해 궁금한 점이 있으신가요? 언제든지 문의주세요. 빠르고 친절한 상담을 제공합니다.";
-  const url = `${siteUrl}/contact`;
+    "SNS 성장을 위한 실전 전략과 최신 트렌드. 인스타그램, 유튜브, 틱톡 마케팅 노하우를 공유합니다.";
+  const url = `${siteUrl}/blog`;
   const ogImage = `${siteUrl}/og.png`;
 
   return (
@@ -27,4 +27,3 @@ export default function Head() {
     </>
   );
 }
-

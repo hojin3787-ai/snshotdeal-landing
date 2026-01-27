@@ -2,11 +2,72 @@
 
 import Link from 'next/link';
 import { FaQuestionCircle, FaCheckCircle, FaCoins } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+  // FAQ 스키마 데이터 추가
+  useEffect(() => {
+    const siteUrl = window.location.origin;
+    
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "충전 신청을 했는데 충전이 되지 않아요.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "충전은 입금자명과 금액을 확인 후 자동으로 처리되기 때문에 꼭 입금하는 입금자의 이름을 작성해 주셔야합니다. 입금을 했으나 10분 동안 충전이 되지 않은 경우 카카오톡을 통해 문의해주세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "환불 규정이 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "시스템이 더이상 주문 이행이 불가능 하다고 판단되는 경우, 주문취소와 함께 서비스 지불금액을 회원의 포인트로 환불 처리 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "작업을 진행해도 계정에 문제가 없나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SNS핫딜은 자사 자체 리워드 플랫폼을 운영하고 있으며 자사 플랫폼 회원들의 리워드 형식으로 작업을하여 인스타그램의 계정 지수 반응을 일으킵니다. 자동로봇이나 매크로를 사용하지 않은 회원들의 순수한 작업이기 때문에 전혀 문제 되지 않습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "보안상 위험하지 않나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "모든 소셜 미디어 작업에 있어서 비밀번호는 요구하지 않습니다. SNS핫딜의 서비스는 실제 한국인들을 대상으로 진행되며 리워드 형식의 안전한 작업방식으로 진행이 되기에 안심하고 이용할수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "주문 가능시간이 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SNS핫딜의 모든 서비스는 24시간 언제든 주문 처리가 가능한 자동 시스템을 갖추고 있습니다. 따라서 포인트만 있으시다면 언제든 이용이 가능합니다."
+          }
+        }
+      ]
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(faqSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   const categories = [
     {

@@ -12,8 +12,36 @@ import { FaXTwitter } from "react-icons/fa6";
 import { HiOutlineCheckCircle, HiOutlineStar } from "react-icons/hi2";
 import { BiSupport } from "react-icons/bi";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Home() {
+  // JSON-LD 스키마를 동적으로 추가
+  useEffect(() => {
+    const siteUrl = window.location.origin;
+    
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "홈",
+          item: siteUrl,
+        },
+      ],
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(breadcrumbSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <main className="bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}

@@ -48,9 +48,33 @@ export default function ReviewsPage() {
       observer.observe(statsRef.current);
     }
 
+    // AggregateRating 스키마 추가
+    const siteUrl = window.location.origin;
+    const ratingSchema = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "SNS핫딜 SNS 마케팅 서비스",
+      "description": "인스타그램, 유튜브, 틱톡, X 계정 성장을 위한 SNS 마케팅 서비스",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "80"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(ratingSchema);
+    document.head.appendChild(script);
+
     return () => {
       if (statsRef.current) {
         observer.unobserve(statsRef.current);
+      }
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
       }
     };
   }, [hasAnimated]);

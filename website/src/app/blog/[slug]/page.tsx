@@ -895,8 +895,45 @@ export default function BlogPost({
     })
     .filter(Boolean);
 
+  // JSON-LD 구조화 데이터
+  const siteUrl = typeof window !== 'undefined' 
+    ? window.location.origin 
+    : process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.thumbnail,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Organization",
+      name: "SNS핫딜",
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "SNS핫딜",
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/blog/${slug}`,
+    },
+  };
+
   return (
     <main className="bg-gray-50">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-3">
