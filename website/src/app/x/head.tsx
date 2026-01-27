@@ -1,4 +1,4 @@
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://xn--sns-h84mk60k.com";
 
 export default function Head() {
   const title = "X(트위터) 팔로워/리트윗/좋아요 | SNS핫딜";

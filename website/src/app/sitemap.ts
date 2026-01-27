@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { blogPostsMeta } from "./blog/postsMeta";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://xn--sns-h84mk60k.com";
 
 function url(path: string) {
   return `${siteUrl}${path.startsWith("/") ? "" : "/"}${path}`;
