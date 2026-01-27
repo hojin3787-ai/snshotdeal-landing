@@ -1,0 +1,29 @@
+---
+inclusion: always
+---
+# Rules Loader Guide (for Kiro)
+
+## Inclusion Order
+- Load exactly two rule files per task:
+  1) `00-공통규칙.md` (always)
+  2) One stage rule that matches the current deliverable (e.g., `02-PRD-규칙.md`)
+- Do not load multiple stage rules together.
+
+## Stage Mapping
+- `outputs/docs/01-원페이저.md` → `01-원페이저-규칙.md`
+- `outputs/docs/02-PRD.md` → `02-PRD-규칙.md`
+- `outputs/docs/03-서비스정책.md` → `03-서비스정책-규칙.md`
+- `outputs/docs/04-화면설계.md` and `outputs/docs/screens/*.md` → `04-화면설계-규칙.md`
+- `outputs/docs/05-디자인정책.md` → `05-디자인정책-규칙.md`
+- `outputs/docs/06-개발설계.md` → `06-개발설계-규칙.md`
+- `outputs/docs/07-테스트계획.md` → `07-테스트계획-규칙.md`
+
+## Core Enforcement (Inherited from 00)
+- One document + one section per turn.
+- Proceed only after explicit approval: "작성해" or "진행해".
+- Service-policy numbers (수치/제한/보상/주기) live only in `03-서비스정책.md`.
+
+## Stop/Ask Triggers
+- Missing prerequisite doc → Ask which prior doc to complete.
+- Section not approved → Ask to approve by section title.
+- Unclear scope → Ask up to 3 concise questions.
