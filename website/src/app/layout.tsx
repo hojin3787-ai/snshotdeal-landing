@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ],
   verification: {
     // 구글 서치콘솔: https://search.google.com/search-console 에서 확인 코드 받아서 교체
-    google: "PGDEtvrBRV3c5qJBbZ9huLikKc6176t6SdJO-0NXDO4",
+    google: "ZphvXU-ZspQEwbBzJrN5QFrCNe8mIs8ua8Eh_iGUe6c",
     // 네이버 서치어드바이저: https://searchadvisor.naver.com 에서 확인 코드 받아서 교체
     other: {
       "naver-site-verification": "YOUR_NAVER_VERIFICATION_CODE",
