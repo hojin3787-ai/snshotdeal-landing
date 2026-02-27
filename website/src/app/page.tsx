@@ -183,7 +183,7 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <a
-              href="https://xn--sns-h84mk60k.com/"
+              href="https://xn--sns-h84mk60k.com/?utm_source=landing_snshotdeal"
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-white hover:bg-gray-50 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-2xl hover:shadow-3xl hover:scale-105 transform"

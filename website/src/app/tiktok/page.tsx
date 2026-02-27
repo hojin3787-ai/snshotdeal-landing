@@ -432,7 +432,7 @@ export default function TikTokPage() {
 
             <div className="mt-12 text-center">
               <a
-                href="https://xn--sns-h84mk60k.com/"
+                href="https://xn--sns-h84mk60k.com/?utm_source=landing_snshotdeal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-gradient-to-r from-pink-600 to-cyan-500 hover:from-pink-700 hover:to-cyan-600 text-white font-bold px-10 py-4 rounded-xl text-lg transition-all shadow-lg hover:shadow-xl"

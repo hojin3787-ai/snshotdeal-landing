@@ -705,7 +705,7 @@ export default function PricingPage() {
                               </td>
                               <td className="px-4 py-5 text-center">
                                 <a
-                                  href="https://xn--sns-h84mk60k.com/"
+                                  href="https://xn--sns-h84mk60k.com/?utm_source=landing_snshotdeal"
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="inline-block px-6 py-2 rounded-lg font-semibold text-white text-sm transition-all hover:shadow-lg"
