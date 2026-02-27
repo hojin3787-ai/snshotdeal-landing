@@ -707,7 +707,7 @@ export default function PricingPage() {
                                 <a
                                   href="https://xn--sns-h84mk60k.com/?utm_source=landing_snshotdeal"
                                   target="_blank"
-                                  rel="noopener noreferrer"
+                                  rel="noopener"
                                   className="inline-block px-6 py-2 rounded-lg font-semibold text-white text-sm transition-all hover:shadow-lg"
                                   style={{ backgroundColor: "#EB5644" }}
                                 >

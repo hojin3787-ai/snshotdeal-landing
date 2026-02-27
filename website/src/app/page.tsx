@@ -185,7 +185,7 @@ export default function Home() {
             <a
               href="https://xn--sns-h84mk60k.com/?utm_source=landing_snshotdeal"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="group bg-white hover:bg-gray-50 font-bold px-8 py-4 rounded-xl text-base transition-all shadow-2xl hover:shadow-3xl hover:scale-105 transform"
               style={{ color: "#EB5644" }}
             >
