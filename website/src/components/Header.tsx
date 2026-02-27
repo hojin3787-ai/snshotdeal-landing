@@ -64,10 +64,10 @@ export default function Header() {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="https://xn--sns-h84mk60k.com/?signinPage" target="_blank" rel="noopener noreferrer" className="text-gray-700 font-medium px-4 py-2 rounded-lg transition-colors hover:bg-gray-100">
+            <a href="https://xn--sns-h84mk60k.com/?signinPage&utm_source=landing_snshotdeal" target="_blank" rel="noopener" className="text-gray-700 font-medium px-4 py-2 rounded-lg transition-colors hover:bg-gray-100">
               로그인
             </a>
-            <a href="https://xn--sns-h84mk60k.com/?signupPage" target="_blank" rel="noopener noreferrer" className="text-white font-semibold px-5 py-2 rounded-lg transition-colors shadow-md hover:shadow-lg" style={{ backgroundColor: '#EB5644' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#D84A3A'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#EB5644'}>
+            <a href="https://xn--sns-h84mk60k.com/?signupPage&utm_source=landing_snshotdeal" target="_blank" rel="noopener" className="text-white font-semibold px-5 py-2 rounded-lg transition-colors shadow-md hover:shadow-lg" style={{ backgroundColor: '#EB5644' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#D84A3A'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#EB5644'}>
               회원가입
             </a>
           </div>
@@ -128,10 +128,10 @@ export default function Header() {
               
               <div className="border-t border-gray-200 my-3"></div>
               
-              <a href="https://xn--sns-h84mk60k.com/?signinPage" target="_blank" rel="noopener noreferrer" className="text-gray-900 font-medium transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#EB5644'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>
+              <a href="https://xn--sns-h84mk60k.com/?signinPage&utm_source=landing_snshotdeal" target="_blank" rel="noopener" className="text-gray-900 font-medium transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = '#EB5644'} onMouseLeave={(e) => e.currentTarget.style.color = '#111827'}>
                 로그인
               </a>
-              <a href="https://xn--sns-h84mk60k.com/?signupPage" target="_blank" rel="noopener noreferrer" className="text-white px-6 py-3 rounded-lg font-semibold text-center transition-colors mt-2" style={{ backgroundColor: '#EB5644' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#D84A3A'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#EB5644'}>
+              <a href="https://xn--sns-h84mk60k.com/?signupPage&utm_source=landing_snshotdeal" target="_blank" rel="noopener" className="text-white px-6 py-3 rounded-lg font-semibold text-center transition-colors mt-2" style={{ backgroundColor: '#EB5644' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#D84A3A'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#EB5644'}>
                 회원가입
               </a>
             </div>
